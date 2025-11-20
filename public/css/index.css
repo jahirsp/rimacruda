@@ -452,3 +452,36 @@ body {
 .upgrade-pro-btn:active {
   transform: translateY(0);
 }
+
+/* ======================
+   BOTÓN MEJORAR A PRO EN HEADER
+======================== */
+.upgrade-pro-header-btn {
+    background: linear-gradient(145deg, #ffd700, #ff6b00);
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    margin-left: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+    white-space: nowrap;
+}
+
+.upgrade-pro-header-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 0, 0.4);
+    background: linear-gradient(145deg, #ffe040, #ff8c00);
+}
+
+.upgrade-pro-header-btn:active {
+    transform: translateY(0);
+}
+
+/* Ocultar botón cuando el usuario no está logueado */
+.upgrade-pro-header-btn.hidden {
+    display: none;
+}
