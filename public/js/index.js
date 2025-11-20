@@ -242,27 +242,30 @@ if (googleBtn) {
 //  Estado del usuario UNIFICADO
 // ======================
 onAuthStateChanged(auth, async (user) => {
-  const userInfo = document.getElementById("userInfo");
-  const loginBtns = document.querySelector(".auth-buttons");
-  const userIconContainer = document.getElementById("userIconContainer");
-  const userMenu = document.getElementById("userMenu");
-  
-  if (user) {
-    // Ocultar botones de login y mostrar icono de usuario
-    if (loginBtns) loginBtns.style.display = "none";
-    if (userInfo) userInfo.style.display = "none";
-    if (userIconContainer) userIconContainer.style.display = "block";
+    const userInfo = document.getElementById("userInfo");
+    const loginBtns = document.querySelector(".auth-buttons");
+    const userIconContainer = document.getElementById("userIconContainer");
+    const userMenu = document.getElementById("userMenu");
+    const upgradeProHeaderBtn = document.getElementById("upgradeProHeaderBtn");
     
-    // Actualizar información del perfil
-    await updateUserProfile(user);
-    
-  } else {
-    // Usuario no logueado
-    if (loginBtns) loginBtns.style.display = "flex";
-    if (userInfo) userInfo.style.display = "none";
-    if (userIconContainer) userIconContainer.style.display = "none";
-    if (userMenu) userMenu.classList.remove("show");
-  }
+    if (user) {
+        // Ocultar botones de login y mostrar icono de usuario + botón Pro
+        if (loginBtns) loginBtns.style.display = "none";
+        if (userInfo) userInfo.style.display = "none";
+        if (userIconContainer) userIconContainer.style.display = "block";
+        if (upgradeProHeaderBtn) upgradeProHeaderBtn.classList.remove("hidden");
+        
+        // Actualizar información del perfil
+        await updateUserProfile(user);
+        
+    } else {
+        // Usuario no logueado - ocultar botón Pro
+        if (loginBtns) loginBtns.style.display = "flex";
+        if (userInfo) userInfo.style.display = "none";
+        if (userIconContainer) userIconContainer.style.display = "none";
+        if (userMenu) userMenu.classList.remove("show");
+        if (upgradeProHeaderBtn) upgradeProHeaderBtn.classList.add("hidden");
+    }
 });
 
 // ======================
@@ -424,3 +427,13 @@ window.startFreestyleMaster = function() {
         window.location.href = 'freestyle_master.html';
     }
 };
+
+// ======================
+//  BOTÓN MEJORAR A PRO EN HEADER
+// ======================
+const upgradeProHeaderBtn = document.getElementById("upgradeProHeaderBtn");
+if (upgradeProHeaderBtn) {
+    upgradeProHeaderBtn.addEventListener("click", () => {
+        alert("🎉 ¡Próximamente! Función de mejora a Pro en desarrollo.\n\nPrecio: $19.99/mes\nBeneficios:\n• Acceso a juegos exclusivos\n• Estadísticas avanzadas\n• Sin anuncios\n• Soporte prioritario");
+    });
+}
