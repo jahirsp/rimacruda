@@ -1,0 +1,158 @@
+<!-- HTML LIMPIO (index.html o campeones.html) -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freestyle Grid</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/freestyle_game.css">
+
+</head>
+
+<body>
+
+    <header>
+    <img src="imagenes/logoV2.png" alt="Logo" class="logo">
+    <a href="https://www.instagram.com/rima_crudaoficial?igsh=bjR3bHR3ZGZiYXZi" target="_blank" class="instagram-icon">
+        <i class="fab fa-instagram"></i>
+    </a>
+
+    <!-- Botones de Auth -->
+    <div class="auth-buttons">
+        <button class="auth-btn login-btn" id="openLoginModal">Iniciar Sesión</button>
+        <button class="auth-btn signup-btn" id="openRegisterModal">Registrarse</button>
+    </div>
+
+    <!-- Icono de usuario (aparece al iniciar sesión) -->
+    <div id="userIconContainer" class="user-icon-container" style="display:none;">
+        <img id="userIcon" src="imagenes/default-avatar.png" alt="Usuario" class="user-icon">
+    </div>
+</header>
+
+    <!-- Modal -->
+    <div class="modal" id="difficultyModal">
+        <div class="modal-content">
+            <h2>Elige la Dificultad</h2>
+            <select id="difficultySelect">
+                <option value="none">Selecciona</option>
+                <option value="facil">Fácil</option>
+                <option value="medio">Media</option>
+                <option value="dificil">Difícil</option>
+            </select>
+            <br>
+            <button onclick="startGame()">Iniciar Juego</button>
+            <br>
+            <br>
+            <span>Nota: Si crees que no hay respues usa "nadie"</span>
+        </div>
+    </div>
+
+    <h1>Campeones Freestyle</h1>
+
+    <div class="grid-container">
+        <div class="header-cell" id="timerCell">
+            <div class="timer-text" id="timer"></div>
+        </div>
+        <div class="header-cell"><img src="imagenes/BEs.png" alt="País 1"></div>
+        <div class="header-cell"><img src="imagenes/BMEX.png" alt="País 2"></div>
+        <div class="header-cell"><img src="imagenes/Bandera_Argentina.png" alt="País 3"></div>
+
+        <div class="side-cell"><img src="imagenes/redbull.png" alt="Competencia 1"></div>
+        <div class="input-cell" data-key="2023"><span>2023</span></div>
+        <div class="input-cell" data-key="2008"><span>2008</span></div>
+        <div class="input-cell" data-key="2013"><span>2013</span></div>
+
+        <div class="side-cell"><img src="imagenes/godlevel.jpg" alt="Competencia 2"></div>
+        <div class="input-cell" data-key="2018"><span>2018</span></div>
+        <div class="input-cell" data-key="2015"><span>2015</span></div>
+        <div class="input-cell" data-key="2021"><span>2021</span></div>
+
+        <div class="side-cell"><img src="imagenes/logo_fms_internacional.png" alt="Competencia 3"></div>
+        <div class="input-cell" data-key="2020"><span>2020</span></div>
+        <div class="input-cell" data-key="2019"><span>2019</span></div>
+        <div class="input-cell" data-key="L2023"><span>2023</span></div>
+    </div>
+
+    <div class="input-area" id="inputArea">
+        <!-- nuevo botón --> 
+        <button id="nextLevelBtn" style="display: none; margin-top: 20px;">
+        Siguiente nivel
+        </button>
+
+        <input type="text" id="freestylerInput" placeholder="Escribe el nombre del freestyler">
+        <button id="submitBtn">Aceptar</button>
+    </div>
+
+    <div id="timer"></div>
+
+    <script src="js/main.js"></script>
+
+<!-- Modal de Autenticación para freestyle_game.html -->
+<div id="authModal" class="auth-modal">
+    <div class="auth-modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="auth-tabs">
+            <button class="auth-tab active" data-tab="login">Iniciar Sesión</button>
+            <button class="auth-tab" data-tab="register">Registrarse</button>
+        </div>
+        
+        <form id="loginForm" class="auth-form active">
+            <input type="email" id="loginEmail" placeholder="Correo electrónico" required>
+            <input type="password" id="loginPassword" placeholder="Contraseña" required>
+            <button type="submit">Ingresar</button>
+            
+            <div class="auth-footer">
+                <p>¿No tienes cuenta? <a href="#" id="switchToRegister">Regístrate</a></p>
+            </div>
+        </form>
+        
+        <form id="registerForm" class="auth-form">
+            <input type="text" id="registerUsername" placeholder="Nombre de usuario" required>
+            <input type="email" id="registerEmail" placeholder="Correo electrónico" required>
+            <input type="password" id="registerPassword" placeholder="Contraseña (mín. 6 caracteres)" required>
+            <button type="submit">Crear Cuenta</button>
+            
+            <div class="auth-footer">
+                <p>¿Ya tienes cuenta? <a href="#" id="switchToLogin">Inicia sesión</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Menú de perfil para freestyle_game.html -->
+<div id="userMenu" class="user-menu">
+    <div class="user-menu-content">
+        <span id="closeProfile" class="close-profile">&times;</span>
+        <img id="profilePic" src="imagenes/default-avatar.png" alt="Foto de perfil" class="profile-pic">
+        <h3 id="userName">Usuario</h3>
+
+        <label for="profilePicInput" class="upload-btn">Cambiar foto</label>
+        <input type="file" id="profilePicInput" accept="image/*" hidden>
+
+        <button id="logoutBtnProfile" class="logout-btn">Cerrar sesión</button>
+        <button id="upgradeProBtn" class="upgrade-pro-btn">Mejorar a Pro $19.99/MES</button>
+    </div>
+</div>
+
+<!-- IMPORTAR index.js PARA LA AUTENTICACIÓN -->
+<script type="module" src="js/index.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+  // Verificar autenticación al cargar la página del juego
+  document.addEventListener('DOMContentLoaded', function() {
+    const user = auth.currentUser;
+    if (!user) {
+      // Si no está autenticado, mostrar modal y no permitir jugar
+      openAuthModal('login');
+      document.getElementById('difficultyModal').style.display = 'none';
+      alert("🔐 Debes iniciar sesión para jugar");
+    }
+  });
+</script>
+
+</body>
+
+</html>

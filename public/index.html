@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rima Cruda - Juegos de Freestyle</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <header>
+        <img src="imagenes/logoV2.png" alt="Logo" class="logo">
+        <a href="https://www.instagram.com/rima_crudaoficial?igsh=bjR3bHR3ZGZiYXZi" target="_blank" class="instagram-icon">
+            <i class="fab fa-instagram"></i>
+        </a>
+
+        <!-- Botones de Auth -->
+        <div class="auth-buttons">
+            <button class="auth-btn login-btn" id="openLoginModal">Iniciar Sesión</button>
+            <button class="auth-btn signup-btn" id="openRegisterModal">Registrarse</button>
+        </div>
+
+        <!-- Info de usuario (viejo método) -->
+        <div id="userInfo" style="display: none; align-items: center; gap: 10px;">
+            <!-- Aquí aparecerá el email o icono del usuario y botón de cerrar sesión -->
+        </div>
+
+        <!-- Icono visible solo al iniciar sesión -->
+        <div id="userIconContainer" class="user-icon-container" style="display:none;">
+            <img id="userIcon" src="imagenes/default-avatar.png" alt="Usuario" class="user-icon">
+        </div>
+
+        <!-- Panel de perfil usuario -->
+        <div id="userMenu" class="user-menu">
+            <div class="user-menu-content">
+                <span id="closeProfile" class="close-profile">&times;</span>
+                <img id="profilePic" src="imagenes/default-avatar.png" alt="Foto de perfil" class="profile-pic">
+                <h3 id="userName">Usuario</h3>
+
+                <label for="profilePicInput" class="upload-btn">Cambiar foto</label>
+                <input type="file" id="profilePicInput" accept="image/*" hidden>
+
+                <button id="logoutBtnProfile" class="logout-btn">Cerrar sesión</button>
+                <button id="upgradeProBtn" class="upgrade-pro-btn">Mejorar a Pro $19.99/MES</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Juegos Estrella -->
+    <div style="padding: 20px;">
+        <h2 style="color: #c00000; font-size: 28px; margin-bottom: 10px;"></h2>
+        <div class="menu-container">
+            <!-- Juego Estrella 1 -->
+            <div class="game-option" onclick="window.startFreestyleGame()">
+                <img src="imagenes/vistaprevia1.png" alt="Vista previa Campeones de Freestyle">
+                <span>FREESTYLER grid</span>
+            </div>
+    
+            <!-- Juego Estrella 2 -->
+            <div class="game-option" onclick="window.startFreestyleMaster()">
+                <img src="imagenes/vistaprevia2.png" alt="Vista previa Freestyle Master">
+                <span>4 FOTOS 1 FREESTYLer</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de Autenticación -->
+    <div id="authModal" class="auth-modal">
+        <div class="auth-modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Iniciar Sesión</button>
+                <button class="auth-tab" data-tab="register">Registrarse</button>
+            </div>
+            
+            <!-- Formulario Login -->
+            <form id="loginForm" class="auth-form active">
+                <input type="email" id="loginEmail" placeholder="Correo electrónico" required>
+                <input type="password" id="loginPassword" placeholder="Contraseña" required>
+                <button type="submit">Ingresar</button>
+                
+                <div style="display: flex; justify-content: space-between; margin: 10px 0; font-size: 14px;">
+                    <label style="display: flex; align-items: center;">
+                        <input type="checkbox" style="margin-right: 5px;"> Recuérdame
+                    </label>
+                    <a href="#" style="color: #ca0808; text-decoration: none;">¿Olvidaste tu contraseña?</a>
+                </div>
+                
+                <div style="display: flex; align-items: center; margin: 15px 0; color: #777;">
+                    <div style="flex-grow: 1; height: 1px; background-color: #ddd;"></div>
+                    <div style="padding: 0 10px;">OR</div>
+                    <div style="flex-grow: 1; height: 1px; background-color: #ddd;"></div>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px;">
+                    <button type="button" style="display: flex; align-items: center; justify-content: center; padding: 10px; border: 1px solid #ffffff; border-radius: 8px; background: rgb(216, 13, 13); cursor: pointer;">
+                        <i class="fab fa-apple" style="margin-right: 10px; font-size: 18px;"></i> Continuar con Apple
+                    </button>
+                    <button id="googleLoginBtn" type="button" style="display: flex; align-items: center; justify-content: center; padding: 10px; border: 1px solid #b10707; border-radius: 8px; background: rgb(216, 13, 13); cursor: pointer;">
+                        <i class="fab fa-google" style="margin-right: 10px; font-size: 18px; color: #DB4437;"></i> Continuar con Google
+                    </button>
+                    <button type="button" style="display: flex; align-items: center; justify-content: center; padding: 10px; border: 1px solid #c40000; border-radius: 8px; background: rgb(216, 13, 13); cursor: pointer;">
+                        <i class="fab fa-facebook-f" style="margin-right: 10px; font-size: 18px; color: #1877F2;"></i> Continuar con Facebook
+                    </button>
+                </div>
+                
+                <div class="auth-footer">
+                    <p>¿No tienes cuenta? <a href="#" id="switchToRegister">Regístrate</a></p>
+                </div>
+            </form>
+            
+            <!-- Formulario Registro -->
+            <form id="registerForm" class="auth-form">
+                <input type="text" id="userName" placeholder="Nombre de usuario" required>
+                <input type="email" id="registerEmail" placeholder="Correo electrónico" required>
+                <input type="password" id="registerPassword" placeholder="Contraseña (mín. 6 caracteres)" required>
+                <button type="submit">Crear Cuenta</button>
+                
+                <div style="display: flex; align-items: center; margin: 15px 0; color: #777;">
+                    <div style="flex-grow: 1; height: 1px; background-color: #ddd;"></div>
+                    <div style="padding: 0 10px;">OR</div>
+                    <div style="flex-grow: 1; height: 1px; background-color: #ddd;"></div>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px;">
+                    <button type="button" style="display: flex; align-items: center; justify-content: center; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: rgb(216, 13, 13); cursor: pointer;">
+                        <i class="fab fa-apple" style="margin-right: 10px; font-size: 18px;"></i> Continuar con Apple
+                    </button>
+                    <button type="button" style="display: flex; align-items: center; justify-content: center; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: rgb(216, 13, 13); cursor: pointer;">
+                        <i class="fab fa-google" style="margin-right: 10px; font-size: 18px; color: #DB4437;"></i> Continuar con Google
+                    </button>
+                    <button type="button" style="display: flex; align-items: center; justify-content: center; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: rgb(216, 13, 13); cursor: pointer;">
+                        <i class="fab fa-facebook-f" style="margin-right: 10px; font-size: 18px; color: #1877F2;"></i> Continuar con Facebook
+                    </button>
+                </div>
+                
+                <div class="auth-footer">
+                    <p>¿Ya tienes cuenta? <a href="#" id="switchToLogin">Inicia sesión</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Otros Juegos (descomenta y edita cuando tengas más) -->
+    <!--
+    <div style="padding: 20px;">
+        <h2 style="color: #00c0ff; font-size: 24px; margin-bottom: 10px;">🎮 Otros Juegos</h2>
+        <div class="menu-container">
+            <div class="game-option" onclick="startOtherGame()">
+                <img src="imagenes/vistaprevia_otro.png" alt="Otro juego">
+                <span>Otro Juego</span>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <!-- IMPORTAR LOS SCRIPTS -->
+    <script type="module" src="js/index.js"></script>
+    <script>
+        function startFreestyleGame() {
+            window.location.href = 'freestyle_game.html';
+        }  
+
+        function startFreestyleMaster() {
+            window.location.href = 'freestyle_master.html';
+        }
+
+        // Funcionalidad básica del modal de autenticación (como respaldo)
+        document.addEventListener('DOMContentLoaded', function() {
+            const authModal = document.getElementById('authModal');
+            const openLoginModal = document.getElementById('openLoginModal');
+            const openRegisterModal = document.getElementById('openRegisterModal');
+            const closeModalBtn = document.querySelector('.close-modal');
+            const authTabs = document.querySelectorAll('.auth-tab');
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const switchToRegister = document.getElementById('switchToRegister');
+            const switchToLogin = document.getElementById('switchToLogin');
+
+            function openAuthModal(tab) {
+                if (authModal) authModal.style.display = 'flex';
+                switchAuthTab(tab);
+            }
+
+            function closeAuthModal() {
+                if (authModal) authModal.style.display = 'none';
+            }
+
+            function switchAuthTab(tabName) {
+                if (authTabs) {
+                    authTabs.forEach(tab => {
+                        tab.classList.toggle('active', tab.dataset.tab === tabName);
+                    });
+                }
+                
+                if (loginForm) loginForm.classList.toggle('active', tabName === 'login');
+                if (registerForm) registerForm.classList.toggle('active', tabName === 'register');
+            }
+
+            if (openLoginModal) openLoginModal.addEventListener('click', () => openAuthModal('login'));
+            if (openRegisterModal) openRegisterModal.addEventListener('click', () => openAuthModal('register'));
+            if (closeModalBtn) closeModalBtn.addEventListener('click', closeAuthModal);
+
+            if (authTabs) {
+                authTabs.forEach(tab => {
+                    tab.addEventListener('click', () => switchAuthTab(tab.dataset.tab));
+                });
+            }
+
+            if (switchToRegister) {
+                switchToRegister.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchAuthTab('register');
+                });
+            }
+
+            if (switchToLogin) {
+                switchToLogin.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    switchAuthTab('login');
+                });
+            }
+
+            window.addEventListener('click', (e) => {
+                if (e.target === authModal) {
+                    closeAuthModal();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
